@@ -1,6 +1,8 @@
 package com.GT.employee_service.repository;
 
 import com.GT.employee_service.entity.Product;
+import com.GT.employee_service.projection.ProductDTO;
+import com.GT.employee_service.projection.ProductSummary;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,7 +24,7 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
     // Basic Queries
 
     List<Product> findByName(String name);
-    List<Product> findByCategory(String category);
+//    List<Product> findByCategory(String category);
     Optional<Product> findBySku(String sku);
 
     //  Comparison Queries
@@ -153,4 +155,14 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
             @Param("minPrice") BigDecimal minPrice,
             @Param("maxPrice") BigDecimal maxPrice
     );
+
+    //   Interface Projection
+    List<ProductSummary> findByCategory(String category);
+
+    //   DTO Projection
+    @Query("SELECT new com.GT.projection_demo.dto.ProductDTO(p.name, p.price) FROM Product p")
+    List<ProductDTO> getProductDTOs();
+
+    //  Dynamic Projection
+    <T> List<T> findByCategory(String category, Class<T> type);
 }

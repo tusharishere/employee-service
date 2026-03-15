@@ -1,10 +1,14 @@
 package com.GT.employee_service.controller;
 
 import com.GT.employee_service.entity.Product;
+import com.GT.employee_service.projection.ProductDTO;
+import com.GT.employee_service.projection.ProductSummary;
 import com.GT.employee_service.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/products")
@@ -48,5 +52,15 @@ public class Productcontroller {
             @RequestParam(defaultValue = "asc") String direction) {
 
         return productService.getProductsByCategory(category, page, size, sortBy, direction);
+    }
+
+    @GetMapping("/summary")
+    public List<ProductSummary> getSummary(@RequestParam String category) {
+        return productService.getProductSummary(category);
+    }
+
+    @GetMapping("/dto")
+    public List<ProductDTO> getDTOs() {
+        return productService.getProductDTOs();
     }
 }
