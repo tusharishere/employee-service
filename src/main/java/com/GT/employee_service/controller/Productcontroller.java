@@ -42,9 +42,11 @@ public class Productcontroller {
     @GetMapping("/category/{category}")
     public Page<Product> getProductsByCategory(
             @PathVariable String category,
-            @RequestParam int page,
-            @RequestParam int size) {
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "price") String sortBy,
+            @RequestParam(defaultValue = "asc") String direction) {
 
-        return productService.getProductsByCategory(category, page, size);
+        return productService.getProductsByCategory(category, page, size, sortBy, direction);
     }
 }

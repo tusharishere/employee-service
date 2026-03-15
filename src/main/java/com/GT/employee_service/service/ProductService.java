@@ -9,6 +9,6 @@ public interface ProductService {
 
     Page<Product> getProductsWithPaginationAndSorting(int page, int size, String sortBy, String direction);
 
-    Page<Product> getProductsByCategory(String category, int page, int size);
+    Page<Product> getProductsByCategory(String category, int page, int size, String sortBy, String direction);
 
 }
