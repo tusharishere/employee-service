@@ -48,7 +48,7 @@ public class Product implements Serializable {
     private String category;
 
     @Column(name = "price",nullable = false)
-    private BigDecimal pice;
+    private BigDecimal price;
 
     @Column(name = "quantity")
     private Integer quantity;
